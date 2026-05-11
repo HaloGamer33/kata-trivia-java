@@ -93,7 +93,6 @@ public class Game implements IGame {
         }
     }
 
-
     private String currentCategory() {
         return switch (places.get(currentPlayer)) {
             case 1, 5, 9  -> "Pop";
@@ -124,7 +123,6 @@ public class Game implements IGame {
                 return true;
             }
 
-
         } else {
 
             // TYPO: "corrent" should be -> "correct"
@@ -152,7 +150,6 @@ public class Game implements IGame {
         if (currentPlayer == players.size()) currentPlayer = 0;
         return true;
     }
-
 
     private boolean didPlayerWin() {
         return !(purses.get(currentPlayer) == 6);

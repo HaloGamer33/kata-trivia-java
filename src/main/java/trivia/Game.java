@@ -18,8 +18,10 @@ public class Game implements IGame {
    int currentPlayer = 0;
    boolean isGettingOutOfPenaltyBox;
 
+   public static final int NUMBER_OF_QUESTIONS = 50;
+
    public Game() {
-      for (int i = 0; i < 50; i++) {
+      for (int i = 0; i < NUMBER_OF_QUESTIONS; i++) {
          popQuestions.addLast("Pop Question " + i);
          scienceQuestions.addLast(("Science Question " + i));
          sportsQuestions.addLast(("Sports Question " + i));

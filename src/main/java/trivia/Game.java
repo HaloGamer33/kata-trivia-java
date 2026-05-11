@@ -127,6 +127,7 @@ public class Game implements IGame {
 
         } else {
 
+            // TYPO: "corrent" should be -> "correct"
             System.out.println("Answer was corrent!!!!");
             purses.set(currentPlayer, purses.get(currentPlayer) + 1);
             System.out.println(players.get(currentPlayer)

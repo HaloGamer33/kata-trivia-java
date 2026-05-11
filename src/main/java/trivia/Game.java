@@ -103,39 +103,27 @@ public class Game implements IGame {
     }
 
     public boolean handleCorrectAnswer() {
-        if (inPenaltyBox.get(currentPlayer)) {
-            if (isGettingOutOfPenaltyBox) {
-                System.out.println("Answer was correct!!!!");
-                purses.set(currentPlayer, purses.get(currentPlayer) + 1);
-                System.out.println(players.get(currentPlayer)
-                        + " now has "
-                        + purses.get(currentPlayer)
-                        + " Gold Coins.");
-
-                boolean winner = didPlayerWin();
-                setNextPlayer();
-
-                return winner;
-            } else {
-                setNextPlayer();
-                return true;
-            }
-
-        } else {
-
-            // TYPO: "corrent" should be -> "correct"
-            System.out.println("Answer was corrent!!!!");
-            purses.set(currentPlayer, purses.get(currentPlayer) + 1);
-            System.out.println(players.get(currentPlayer)
-                    + " now has "
-                    + purses.get(currentPlayer)
-                    + " Gold Coins.");
-
-            boolean winner = didPlayerWin();
+        if (inPenaltyBox.get(currentPlayer) && !isGettingOutOfPenaltyBox) {
             setNextPlayer();
-
-            return winner;
+            return true;
         }
+
+        // Print differs depending on whether they're escaping the penalty box
+        if (inPenaltyBox.get(currentPlayer)) {
+            System.out.println("Answer was correct!!!!");
+        } else {
+            System.out.println("Answer was corrent!!!!"); // TYPO: "corrent" should be -> "correct"
+        }
+        purses.set(currentPlayer, purses.get(currentPlayer) + 1);
+        System.out.println(players.get(currentPlayer)
+                + " now has "
+                + purses.get(currentPlayer)
+                + " Gold Coins.");
+
+        boolean winner = didPlayerWin();
+        setNextPlayer();
+
+        return winner;
     }
 
     public boolean wrongAnswer() {

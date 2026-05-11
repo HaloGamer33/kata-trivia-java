@@ -29,11 +29,11 @@ public class GameTest {
 						 ". To breakpoint through it, run this seed alone using the (ignored) test below",
 			expectedOutput, actualOutput);
 	}
-	@Test
-	@Ignore("enable back and set a particular seed to see the output")
-	public void oneSeed() {
-		testSeed(1, true);
-	}
+	// @Test
+	// @Ignore("enable back and set a particular seed to see the output")
+	// public void oneSeed() {
+	// 	testSeed(1, true);
+	// }
 
 	private String extractOutput(Random rand, IGame aGame) {
 		PrintStream old = System.out;

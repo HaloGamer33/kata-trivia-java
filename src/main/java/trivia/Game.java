@@ -95,16 +95,12 @@ public class Game implements IGame {
 
 
     private String currentCategory() {
-        if (places.get(currentPlayer) == 1) return "Pop";
-        if (places.get(currentPlayer) == 5) return "Pop";
-        if (places.get(currentPlayer) == 9) return "Pop";
-        if (places.get(currentPlayer) == 2) return "Science";
-        if (places.get(currentPlayer) == 6) return "Science";
-        if (places.get(currentPlayer) == 10) return "Science";
-        if (places.get(currentPlayer) == 3) return "Sports";
-        if (places.get(currentPlayer) == 7) return "Sports";
-        if (places.get(currentPlayer) == 11) return "Sports";
-        return "Rock";
+        return switch (places.get(currentPlayer)) {
+            case 1, 5, 9  -> "Pop";
+            case 2, 6, 10 -> "Science";
+            case 3, 7, 11 -> "Sports";
+            default       -> "Rock";
+        };
     }
 
     public boolean handleCorrectAnswer() {

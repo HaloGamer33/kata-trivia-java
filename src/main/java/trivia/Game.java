@@ -29,10 +29,6 @@ public class Game implements IGame {
         }
     }
 
-    public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
-    }
-
     public boolean add(String playerName) {
         places.add(1);
         purses.add(0);
@@ -42,10 +38,6 @@ public class Game implements IGame {
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
         return true;
-    }
-
-    public int howManyPlayers() {
-        return players.size();
     }
 
     public void roll(int roll) {

@@ -44,27 +44,25 @@ public class Game implements IGame {
     public void roll(int roll) {
         final boolean rollIsOdd = roll % 2 != 0;
         final String playerName = players.get(currentPlayer);
+        final boolean playerIsInPenaltyBox = inPenaltyBox.get(currentPlayer);
 
         System.out.println(playerName + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-
-        if (inPenaltyBox.get(currentPlayer) && !rollIsOdd) {
+        if (playerIsInPenaltyBox && !rollIsOdd) {
             System.out.println(playerName + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
             return;
         }
 
-        if (inPenaltyBox.get(currentPlayer) && rollIsOdd) {
-            isGettingOutOfPenaltyBox = true;
+        if (playerIsInPenaltyBox && rollIsOdd) {
             System.out.println(playerName + " is getting out of the penalty box");
+            isGettingOutOfPenaltyBox = true;
         }
 
         movePlayer(places, currentPlayer, roll);
 
-        System.out.println(playerName
-                + "'s new location is "
-                + places.get(currentPlayer));
+        System.out.println("%s's new location is %s".formatted(playerName, places.get(currentPlayer)));
         System.out.println("The category is " + currentCategory());
         askQuestion();
         return;

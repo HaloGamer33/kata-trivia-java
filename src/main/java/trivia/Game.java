@@ -20,6 +20,7 @@ public class Game implements IGame {
 
     public static final int NUMBER_OF_QUESTIONS = 50;
     public static final int NUMBER_OF_SQUARES = 12;
+    public static final int COINS_TO_WIN = 6;
 
     public Game() {
         for (int i = 0; i < NUMBER_OF_QUESTIONS; i++) {
@@ -133,7 +134,8 @@ public class Game implements IGame {
         places.set(currentPlayer, position);
     }
 
+    //
     private boolean didPlayerWin() {
-        return !(purses.get(currentPlayer) == 6);
+        return !(purses.get(currentPlayer) == COINS_TO_WIN);
     }
 }

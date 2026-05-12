@@ -69,7 +69,7 @@ public class Game implements IGame {
             isGettingOutOfPenaltyBox = true;
         }
 
-        movePlayer(places, currentPlayer, roll);
+        movePlayer(roll);
 
         System.out.println("%s's new location is %s".formatted(playerName, places.get(currentPlayer)));
         System.out.println("The category is " + currentCategory());
@@ -109,7 +109,7 @@ public class Game implements IGame {
         } else {
             System.out.println("Answer was corrent!!!!"); // TYPO: "corrent" should be -> "correct"
         }
-        addCoinsToPlayer(purses, currentPlayer, COINS_PER_CORRECT_ANSWER);
+        addCoinsToPlayer(COINS_PER_CORRECT_ANSWER);
         System.out.println("%s now has %s Gold Coins.".formatted(playerName, purses.get(currentPlayer)));
 
         boolean notAWinner = !didPlayerWin();
@@ -132,7 +132,7 @@ public class Game implements IGame {
         if (currentPlayer == players.size()) currentPlayer = 0;
     }
 
-    public void movePlayer(ArrayList<Integer> places, int currentPlayer, int amount) {
+    public void movePlayer(int amount) {
         int position = places.get(currentPlayer);
         position += amount;
         if (position > NUMBER_OF_SQUARES) {
@@ -141,7 +141,7 @@ public class Game implements IGame {
         places.set(currentPlayer, position);
     }
 
-    public void addCoinsToPlayer(ArrayList<Integer> purses, int currentPlayer, int amount) {
+    public void addCoinsToPlayer(int amount) {
         int coins = purses.get(currentPlayer);
         coins += amount;
         purses.set(currentPlayer, coins);

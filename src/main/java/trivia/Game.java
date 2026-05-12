@@ -95,6 +95,8 @@ public class Game implements IGame {
     }
 
     public boolean handleCorrectAnswer() {
+        final String playerName = players.get(currentPlayer);
+
         if (inPenaltyBox.get(currentPlayer) && !isGettingOutOfPenaltyBox) {
             setNextPlayer();
             return true;
@@ -106,11 +108,8 @@ public class Game implements IGame {
         } else {
             System.out.println("Answer was corrent!!!!"); // TYPO: "corrent" should be -> "correct"
         }
-        purses.set(currentPlayer, purses.get(currentPlayer) + 1);
-        System.out.println(players.get(currentPlayer)
-                + " now has "
-                + purses.get(currentPlayer)
-                + " Gold Coins.");
+        addCoinsToPlayer(purses, currentPlayer, 1);
+        System.out.println("%s now has %s Gold Coins.".formatted(playerName, purses.get(currentPlayer)));
 
         boolean winner = didPlayerWin();
         setNextPlayer();
@@ -139,6 +138,12 @@ public class Game implements IGame {
             position -= NUMBER_OF_SQUARES;
         }
         places.set(currentPlayer, position);
+    }
+
+    public void addCoinsToPlayer(ArrayList<Integer> purses, int currentPlayer, int amount) {
+        int coins = purses.get(currentPlayer);
+        coins += amount;
+        purses.set(currentPlayer, coins);
     }
 
     private boolean didPlayerWin() {

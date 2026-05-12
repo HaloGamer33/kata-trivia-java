@@ -28,6 +28,7 @@ public class Game implements IGame {
     private static final Set<Integer> SCIENCE_SQUARES = Set.of(2, 6, 10);
     private static final Set<Integer> SPORTS_SQUARES  = Set.of(3, 7, 11);
     private static final Set<Integer> ROCK_SQUARES    = Set.of(4, 8, 12);
+    public static final int COINS_PER_CORRECT_ANSWER = 1;
 
     public Game() {
         for (int i = 0; i < NUMBER_OF_QUESTIONS; i++) {
@@ -108,7 +109,7 @@ public class Game implements IGame {
         } else {
             System.out.println("Answer was corrent!!!!"); // TYPO: "corrent" should be -> "correct"
         }
-        addCoinsToPlayer(purses, currentPlayer, 1);
+        addCoinsToPlayer(purses, currentPlayer, COINS_PER_CORRECT_ANSWER);
         System.out.println("%s now has %s Gold Coins.".formatted(playerName, purses.get(currentPlayer)));
 
         boolean notAWinner = !didPlayerWin();

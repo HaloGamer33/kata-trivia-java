@@ -134,8 +134,13 @@ public class Game implements IGame {
         places.set(currentPlayer, position);
     }
 
-    //
     private boolean didPlayerWin() {
-        return !(purses.get(currentPlayer) == COINS_TO_WIN);
+        final int playerCoins = purses.get(currentPlayer);
+        // BUG: this seems to be a bug, but the test won't pass without the
+        // inverted logic.
+        if (playerCoins != COINS_TO_WIN) {
+            return true;
+        }
+        return false;
     }
 }

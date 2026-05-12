@@ -19,6 +19,7 @@ public class Game implements IGame {
     boolean isGettingOutOfPenaltyBox;
 
     public static final int NUMBER_OF_QUESTIONS = 50;
+    public static final int NUMBER_OF_SQUARES = 12;
 
     public Game() {
         for (int i = 0; i < NUMBER_OF_QUESTIONS; i++) {
@@ -42,13 +43,13 @@ public class Game implements IGame {
 
     public void roll(int roll) {
         final boolean rollIsOdd = roll % 2 != 0;
+        final int playerPosition = places.get(currentPlayer);
 
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);
 
         if (!inPenaltyBox.get(currentPlayer)) {
-            places.set(currentPlayer, places.get(currentPlayer) + roll);
-            if (places.get(currentPlayer) > 12) places.set(currentPlayer, places.get(currentPlayer) - 12);
+            movePlayer(places, currentPlayer, roll);
 
             System.out.println(players.get(currentPlayer)
                     + "'s new location is "
@@ -62,8 +63,7 @@ public class Game implements IGame {
             isGettingOutOfPenaltyBox = true;
 
             System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-            places.set(currentPlayer, places.get(currentPlayer) + roll);
-            if (places.get(currentPlayer) > 12) places.set(currentPlayer, places.get(currentPlayer) - 12);
+            movePlayer(places, currentPlayer, roll);
 
             System.out.println(players.get(currentPlayer)
                     + "'s new location is "
@@ -131,6 +131,15 @@ public class Game implements IGame {
     public void setNextPlayer() {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
+    }
+
+    public void movePlayer(ArrayList<Integer> places, int currentPlayer, int amount) {
+        int position = places.get(currentPlayer);
+        position += amount;
+        if (position > NUMBER_OF_SQUARES) {
+            position -= NUMBER_OF_SQUARES;
+        }
+        places.set(currentPlayer, position);
     }
 
     private boolean didPlayerWin() {

@@ -43,37 +43,31 @@ public class Game implements IGame {
 
     public void roll(int roll) {
         final boolean rollIsOdd = roll % 2 != 0;
+        final String playerName = players.get(currentPlayer);
 
-        System.out.println(players.get(currentPlayer) + " is the current player");
+        System.out.println(playerName + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (!inPenaltyBox.get(currentPlayer)) {
-            movePlayer(places, currentPlayer, roll);
 
-            System.out.println(players.get(currentPlayer)
-                    + "'s new location is "
-                    + places.get(currentPlayer));
-            System.out.println("The category is " + currentCategory());
-            askQuestion();
+        if (inPenaltyBox.get(currentPlayer) && !rollIsOdd) {
+            System.out.println(playerName + " is not getting out of the penalty box");
+            isGettingOutOfPenaltyBox = false;
             return;
         }
 
-        if (rollIsOdd) {
+        if (inPenaltyBox.get(currentPlayer) && rollIsOdd) {
             isGettingOutOfPenaltyBox = true;
-
-            System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-            movePlayer(places, currentPlayer, roll);
-
-            System.out.println(players.get(currentPlayer)
-                    + "'s new location is "
-                    + places.get(currentPlayer));
-            System.out.println("The category is " + currentCategory());
-            askQuestion();
-            return;
+            System.out.println(playerName + " is getting out of the penalty box");
         }
 
-        System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-        isGettingOutOfPenaltyBox = false;
+        movePlayer(places, currentPlayer, roll);
+
+        System.out.println(playerName
+                + "'s new location is "
+                + places.get(currentPlayer));
+        System.out.println("The category is " + currentCategory());
+        askQuestion();
+        return;
     }
 
     private void askQuestion() {

@@ -43,7 +43,6 @@ public class Game implements IGame {
 
     public void roll(int roll) {
         final boolean rollIsOdd = roll % 2 != 0;
-        final int playerPosition = places.get(currentPlayer);
 
         System.out.println(players.get(currentPlayer) + " is the current player");
         System.out.println("They have rolled a " + roll);

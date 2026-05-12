@@ -111,10 +111,10 @@ public class Game implements IGame {
         addCoinsToPlayer(purses, currentPlayer, 1);
         System.out.println("%s now has %s Gold Coins.".formatted(playerName, purses.get(currentPlayer)));
 
-        boolean winner = didPlayerWin();
+        boolean notAWinner = !didPlayerWin();
         setNextPlayer();
 
-        return winner;
+        return notAWinner;
     }
 
     public boolean wrongAnswer() {
@@ -148,9 +148,7 @@ public class Game implements IGame {
 
     private boolean didPlayerWin() {
         final int playerCoins = purses.get(currentPlayer);
-        // BUG: this seems to be a bug, but the test won't pass without the
-        // inverted logic.
-        if (playerCoins != COINS_TO_WIN) {
+        if (playerCoins == COINS_TO_WIN) {
             return true;
         }
         return false;

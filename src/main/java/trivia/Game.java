@@ -2,6 +2,7 @@ package trivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Set;
 
 // REFACTOR ME
 public class Game implements IGame {
@@ -21,6 +22,12 @@ public class Game implements IGame {
     public static final int NUMBER_OF_QUESTIONS = 50;
     public static final int NUMBER_OF_SQUARES = 12;
     public static final int COINS_TO_WIN = 6;
+    public static final int STARTING_PLACE = 1;
+    public static final int STARTING_COINS = 0;
+    private static final Set<Integer> POP_SQUARES     = Set.of(1, 5, 9);
+    private static final Set<Integer> SCIENCE_SQUARES = Set.of(2, 6, 10);
+    private static final Set<Integer> SPORTS_SQUARES  = Set.of(3, 7, 11);
+    private static final Set<Integer> ROCK_SQUARES    = Set.of(4, 8, 12);
 
     public Game() {
         for (int i = 0; i < NUMBER_OF_QUESTIONS; i++) {
@@ -32,8 +39,8 @@ public class Game implements IGame {
     }
 
     public boolean add(String playerName) {
-        places.add(1);
-        purses.add(0);
+        places.add(STARTING_PLACE);
+        purses.add(STARTING_COINS);
         inPenaltyBox.add(false);
         players.add(playerName);
 
@@ -79,12 +86,12 @@ public class Game implements IGame {
     }
 
     private String currentCategory() {
-        return switch (places.get(currentPlayer)) {
-            case 1, 5, 9  -> "Pop";
-            case 2, 6, 10 -> "Science";
-            case 3, 7, 11 -> "Sports";
-            default       -> "Rock";
-        };
+        int place = places.get(currentPlayer);
+        if (POP_SQUARES.contains(place))     return "Pop";
+        if (SCIENCE_SQUARES.contains(place)) return "Science";
+        if (SPORTS_SQUARES.contains(place))  return "Sports";
+        if (ROCK_SQUARES.contains(place))    return "Rock";
+        return "";
     }
 
     public boolean handleCorrectAnswer() {
